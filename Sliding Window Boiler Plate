@@ -33,3 +33,23 @@ Variable Size Window
                 }
             }
         }
+_____________________________________________________________________________
+
+Example and better way to write the same algo (variable size)
+Leetcode Question:
+Subarray Product Less Than K
+Solution:
+int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int count=0, pro=1;
+        int i=0, j=0;
+        while(j<nums.size()){
+            pro*=nums[j];
+            while(i<=j && pro>=k){
+                pro=pro/nums[i];
+                i++;
+            }
+            count+=j-i+1;
+            j++;
+        }
+        return count;
+    }
