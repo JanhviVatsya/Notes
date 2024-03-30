@@ -32,7 +32,7 @@ double findMaxAverage(vector<int>& nums, int k) {
         }
         return maxavg;
     }
-____________________________________________________________________
+______________________________________________________________________
 
 Variable Size Window
 
@@ -53,7 +53,7 @@ Variable Size Window
                 }
             }
         }
-_____________________________________________________________________________
+__________________________________________________________________________
 
 Example and better way to write the same algo (variable size)
 Leetcode Question:
@@ -72,4 +72,35 @@ int numSubarrayProductLessThanK(vector<int>& nums, int k) {
             j++;
         }
         return count;
+    }
+_____________________________________________________________________________
+
+Very Important Concept on Sliding Window
+Leetcode Question:
+Subarrays with K Different Integers
+Question Link: 
+https://leetcode.com/problems/subarrays-with-k-different-integers/description/?envType=daily-question&envId=2024-03-30
+Solution:
+int atmost(vector<int>&nums, int k){
+        int count=0;
+        unordered_map<int, int>mp;
+        int i=0, j=0;
+        while(j<nums.size()){
+            mp[nums[j]]++;
+            while(mp.size()>k){
+                mp[nums[i]]--;
+                if(mp[nums[i]]==0){
+                    mp.erase(nums[i]);
+                }
+                i++;
+            }
+            count+=j-i+1;
+            j++;
+        }
+        return count;
+    }
+
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+        int exactly= atmost(nums, k)- atmost(nums, k-1);
+        return exactly;
     }
