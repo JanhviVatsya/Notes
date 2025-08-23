@@ -1,0 +1,24 @@
+Fast power using binary exponentiation  standard optimized boilerplate 
+
+This code is not some random snippet—it’s basically the standard optimized boilerplate for computing: 
+
+                                                (x ^ y) % mod
+
+using binary exponentiation (also called fast power, or powmod).
+
+
+    int mod = 1000000007;
+
+    long long modpow(long long base, long long exp, long long mod) {
+    long long result = 1;
+    base %= mod;  // handle case when base >= mod
+
+    while (exp > 0) {
+        if (exp & 1) { // if current bit of exp is 1
+            result = (result * base) % mod;
+        }
+        base = (base * base) % mod; // square the base
+        exp >>= 1; // divide exp by 2
+    }
+    return result;
+}
