@@ -6,3 +6,37 @@ void DFS(int i, int j){
   DFS(i, j+1);
   DFS(i, j-1);
 }
+
+
+
+
+--------------------------------------------OR--------------------------------------
+
+// Global directions (4-way movement)
+vector<pair<int,int>> directions = {{1,0},{-1,0},{0,1},{0,-1}};
+
+void dfs(vector<vector<int>>& grid, int x, int y, vector<vector<bool>>& visited) {
+    int m = grid.size();
+    int n = grid[0].size();
+
+    // 1. Boundary + visited check
+    if(x < 0 || y < 0 || x >= m || y >= n || visited[x][y])
+        return;
+
+    // 2. Mark visited
+    visited[x][y] = true;
+
+    // --- Place custom logic here ---
+    // e.g. process cell, increment count, etc.
+    // cout << "Visiting: " << x << "," << y << endl;
+
+    // 3. Explore all neighbors
+    for(auto& d : directions) {
+        int newX = x + d.first;
+        int newY = y + d.second;
+        dfs(grid, newX, newY, visited);
+    }
+
+    // 4. Backtracking step (if needed):
+    // visited[x][y] = false;
+}
